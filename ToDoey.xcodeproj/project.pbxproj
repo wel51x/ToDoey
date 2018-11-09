@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2854C6E3219548A300A3A46F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2854C6E2219548A300A3A46F /* AppDelegate.swift */; };
-		2854C6E5219548A300A3A46F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2854C6E4219548A300A3A46F /* ViewController.swift */; };
+		2854C6E5219548A300A3A46F /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2854C6E4219548A300A3A46F /* ToDoListViewController.swift */; };
 		2854C6E8219548A300A3A46F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2854C6E6219548A300A3A46F /* Main.storyboard */; };
 		2854C6EA219548A600A3A46F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2854C6E9219548A600A3A46F /* Assets.xcassets */; };
 		2854C6ED219548A600A3A46F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2854C6EB219548A600A3A46F /* LaunchScreen.storyboard */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		2854C6DF219548A300A3A46F /* ToDoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2854C6E2219548A300A3A46F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2854C6E4219548A300A3A46F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2854C6E4219548A300A3A46F /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		2854C6E7219548A300A3A46F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2854C6E9219548A600A3A46F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2854C6EC219548A600A3A46F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				2854C6E2219548A300A3A46F /* AppDelegate.swift */,
-				2854C6E4219548A300A3A46F /* ViewController.swift */,
+				2854C6E4219548A300A3A46F /* ToDoListViewController.swift */,
 				2854C6E6219548A300A3A46F /* Main.storyboard */,
 				2854C6E9219548A600A3A46F /* Assets.xcassets */,
 				2854C6EB219548A600A3A46F /* LaunchScreen.storyboard */,
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2854C6E5219548A300A3A46F /* ViewController.swift in Sources */,
+				2854C6E5219548A300A3A46F /* ToDoListViewController.swift in Sources */,
 				2854C6E3219548A300A3A46F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ToDoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -291,7 +292,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tahoesoftware.ToDoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -301,6 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ToDoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,7 +310,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tahoesoftware.ToDoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
