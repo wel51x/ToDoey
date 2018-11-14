@@ -10,18 +10,55 @@ import UIKit
 
 class ToDoListViewController: UITableViewController
     {
-    var itemArray = ["Number One", "Nummer Zwei", "Numero Tre"]
-    
+    var itemArray = [Item()]
+
     let defaults = UserDefaults.standard
 
     override func viewDidLoad()
         {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        if let items = defaults.array(forKey: "ToDoListArray") as? [String]
-            {
-            itemArray = items
-            }
+            itemArray.remove(at: 0)
+            var newItem = Item()
+            newItem.title = "Number One"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Number One"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Number One"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Number One"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Nummer Zwei"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Nummer Zwei"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Nummer Zwei"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Nummer Zwei"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Numero Tre"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Numero Tre"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Numero Tre"
+            itemArray.append(newItem)
+            newItem = Item()
+            newItem.title = "Numero Tre"
+            itemArray.append(newItem)
+            if let items = ArchiveUtil.loadItems()
+                {
+                itemArray = items
+                }
         }
     
     //MARK - Tableview DataSource methods
@@ -37,8 +74,11 @@ class ToDoListViewController: UITableViewController
         {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell",
                                                  for: indexPath)
+        let item = itemArray[indexPath.row]
             
-        cell.textLabel?.text = itemArray[indexPath.row]
+        cell.textLabel?.text = item.title
+            
+        cell.accessoryType = (item.done) ? .checkmark : .none
 
         return cell
         }
@@ -48,18 +88,13 @@ class ToDoListViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
         {
-        // print(itemArray[indexPath.row])
-            
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark
-            {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-            }
-        else
-            {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            }
-            
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        
+        tableView.reloadData()
+        
         tableView.deselectRow(at: indexPath, animated: true)
+            
+        ArchiveUtil.saveItems(Items: itemArray)
         }
     
 
@@ -80,8 +115,11 @@ class ToDoListViewController: UITableViewController
             print(addItemTextField.text!)
             if addItemTextField.text! != ""
                 {
-                self.itemArray.append(addItemTextField.text!)
-                self.defaults.set(self.itemArray, forKey: "ToDoListArray")
+                let newItem = Item()
+                newItem.title = addItemTextField.text!
+                self.itemArray.append(newItem)
+                    
+                ArchiveUtil.saveItems(Items: self.itemArray)
                 self.tableView.reloadData()
                 }
             }
