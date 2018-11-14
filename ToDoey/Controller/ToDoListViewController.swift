@@ -20,46 +20,7 @@ class ToDoListViewController: UITableViewController
             
         print(FileUtil.dataFilePath!)
         // Do any additional setup after loading the view, typically from a nib.
-            itemArray.remove(at: 0)
-/*
-            var newItem = Item()
-            newItem.title = "Number One"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Number One"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Number One"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Number One"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Nummer Zwei"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Nummer Zwei"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Nummer Zwei"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Nummer Zwei"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Numero Tre"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Numero Tre"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Numero Tre"
-            itemArray.append(newItem)
-            newItem = Item()
-            newItem.title = "Numero Tre"
-            itemArray.append(newItem)
- */
- //           if let items = ArchiveUtil.loadItems()
+        itemArray.removeAll()
         if let items = FileUtil.loadItems()
             {
             itemArray = items
@@ -99,7 +60,6 @@ class ToDoListViewController: UITableViewController
         
         tableView.deselectRow(at: indexPath, animated: true)
             
-//        ArchiveUtil.saveItems(Items: itemArray)
         FileUtil.saveItems(Items: itemArray)
         }
     
@@ -118,14 +78,12 @@ class ToDoListViewController: UITableViewController
                                         style: .default)
             { (action) in
             // What happens when user clicks Add Item button on UIAlert
-//            print(addItemTextField.text!)
             if addItemTextField.text! != ""
                 {
                 let newItem = Item()
                 newItem.title = addItemTextField.text!
                 self.itemArray.append(newItem)
                     
-//                ArchiveUtil.saveItems(Items: self.itemArray)
                 FileUtil.saveItems(Items: self.itemArray)
                 self.tableView.reloadData()
                 }
