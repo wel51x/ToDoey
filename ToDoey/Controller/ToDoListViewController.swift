@@ -13,12 +13,15 @@ class ToDoListViewController: UITableViewController
     var itemArray = [Item()]
 
     let defaults = UserDefaults.standard
-
+    
     override func viewDidLoad()
         {
         super.viewDidLoad()
+            
+        print(FileUtil.dataFilePath!)
         // Do any additional setup after loading the view, typically from a nib.
             itemArray.remove(at: 0)
+/*
             var newItem = Item()
             newItem.title = "Number One"
             itemArray.append(newItem)
@@ -55,10 +58,12 @@ class ToDoListViewController: UITableViewController
             newItem = Item()
             newItem.title = "Numero Tre"
             itemArray.append(newItem)
-            if let items = ArchiveUtil.loadItems()
-                {
-                itemArray = items
-                }
+ */
+ //           if let items = ArchiveUtil.loadItems()
+        if let items = FileUtil.loadItems()
+            {
+            itemArray = items
+            }
         }
     
     //MARK - Tableview DataSource methods
@@ -94,7 +99,8 @@ class ToDoListViewController: UITableViewController
         
         tableView.deselectRow(at: indexPath, animated: true)
             
-        ArchiveUtil.saveItems(Items: itemArray)
+//        ArchiveUtil.saveItems(Items: itemArray)
+        FileUtil.saveItems(Items: itemArray)
         }
     
 
@@ -112,14 +118,15 @@ class ToDoListViewController: UITableViewController
                                         style: .default)
             { (action) in
             // What happens when user clicks Add Item button on UIAlert
-            print(addItemTextField.text!)
+//            print(addItemTextField.text!)
             if addItemTextField.text! != ""
                 {
                 let newItem = Item()
                 newItem.title = addItemTextField.text!
                 self.itemArray.append(newItem)
                     
-                ArchiveUtil.saveItems(Items: self.itemArray)
+//                ArchiveUtil.saveItems(Items: self.itemArray)
+                FileUtil.saveItems(Items: self.itemArray)
                 self.tableView.reloadData()
                 }
             }

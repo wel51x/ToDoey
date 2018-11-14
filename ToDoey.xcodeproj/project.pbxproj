@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		283A7539219B42F000A34C61 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283A7538219B42F000A34C61 /* Item.swift */; };
 		283A753C219BC24D00A34C61 /* ArchiveUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283A753B219BC24D00A34C61 /* ArchiveUtil.swift */; };
+		283A753E219BEA5E00A34C61 /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283A753D219BEA5E00A34C61 /* FileUtil.swift */; };
 		2854C6E3219548A300A3A46F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2854C6E2219548A300A3A46F /* AppDelegate.swift */; };
 		2854C6E5219548A300A3A46F /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2854C6E4219548A300A3A46F /* ToDoListViewController.swift */; };
 		2854C6E8219548A300A3A46F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2854C6E6219548A300A3A46F /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		283A7538219B42F000A34C61 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		283A753B219BC24D00A34C61 /* ArchiveUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveUtil.swift; sourceTree = "<group>"; };
+		283A753D219BEA5E00A34C61 /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		2854C6DF219548A300A3A46F /* ToDoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2854C6E2219548A300A3A46F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2854C6E4219548A300A3A46F /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			children = (
 				283A7538219B42F000A34C61 /* Item.swift */,
 				283A753B219BC24D00A34C61 /* ArchiveUtil.swift */,
+				283A753D219BEA5E00A34C61 /* FileUtil.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				2854C6E5219548A300A3A46F /* ToDoListViewController.swift in Sources */,
 				283A7539219B42F000A34C61 /* Item.swift in Sources */,
 				2854C6E3219548A300A3A46F /* AppDelegate.swift in Sources */,
+				283A753E219BEA5E00A34C61 /* FileUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
