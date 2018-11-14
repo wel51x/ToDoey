@@ -13,18 +13,21 @@ class ToDoListViewController: UITableViewController
     var itemArray = [Item()]
 
     let defaults = UserDefaults.standard
-    
+
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     override func viewDidLoad()
         {
         super.viewDidLoad()
             
-        print(FileUtil.dataFilePath!)
         // Do any additional setup after loading the view, typically from a nib.
         itemArray.removeAll()
-        if let items = FileUtil.loadItems()
+
+        if let items = CoreDataUtil.loadItems()
             {
             itemArray = items
             }
+ 
         }
     
     //MARK - Tableview DataSource methods
@@ -60,7 +63,7 @@ class ToDoListViewController: UITableViewController
         
         tableView.deselectRow(at: indexPath, animated: true)
             
-        FileUtil.saveItems(Items: itemArray)
+        CoreDataUtil.saveItems(Items: itemArray)
         }
     
 
@@ -80,11 +83,13 @@ class ToDoListViewController: UITableViewController
             // What happens when user clicks Add Item button on UIAlert
             if addItemTextField.text! != ""
                 {
-                let newItem = Item()
+                let newItem = Item(context: self.context)
+                    
                 newItem.title = addItemTextField.text!
+                newItem.done = false
                 self.itemArray.append(newItem)
                     
-                FileUtil.saveItems(Items: self.itemArray)
+                CoreDataUtil.saveItems(Items: self.itemArray)
                 self.tableView.reloadData()
                 }
             }

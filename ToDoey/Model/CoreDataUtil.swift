@@ -1,5 +1,5 @@
 //
-//  FileUtil.swift
+//  CoreDataUtil.swift
 //  ToDoey
 //
 //  Created by Winston Lee on 11/13/18.
@@ -7,30 +7,44 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
-class FileUtil
+class CoreDataUtil
     {
-    public static let dataFilePath = FileManager.default.urls(for: .documentDirectory,
-                in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     static func saveItems(Items : [Item]?)
         {
-        let encoder = PropertyListEncoder()
-            
         do
             {
-            let data = try encoder.encode(Items)
-            try data.write(to: FileUtil.dataFilePath!)
+            try context.save()
             }
         catch
             {
-            print("Error encoding itemArray")
+            print("Error saving context, \(error)")
             }
         }
     
     static func loadItems() -> [Item]?
         {
-        if let data = try? Data(contentsOf: FileUtil.dataFilePath!)
+        var itemArray  = [Item()]
+        itemArray.removeAll()
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do
+            {
+            itemArray = try context.fetch(request)
+            }
+            catch
+            {
+            print("Error loading itemArray, \(error)")
+            }
+        return(itemArray)
+        }
+/*
+    static func loadItems() -> [Item]?
+        {
+        if let data = try? Data(contentsOf: CoreDataUtil.dataFilePath!)
             {
             let decoder = PropertyListDecoder()
             do
@@ -46,4 +60,5 @@ class FileUtil
         itemArray.removeAll()
         return(itemArray)
         }
+ */
     }
