@@ -57,7 +57,11 @@ class ToDoListViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
         {
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+// if want to delete row rather than just set checkmark
+//        context.delete(itemArray[indexPath.row])
+//        itemArray.remove(at: indexPath.row)
+            
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done // flip checkmark
         
         tableView.reloadData()
         
