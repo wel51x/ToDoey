@@ -10,7 +10,7 @@ import UIKit
 
 class CategoryViewController: UITableViewController
     {
-    var categoryArray = [Category()]
+    var categoryArray = [Category]()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -18,7 +18,7 @@ class CategoryViewController: UITableViewController
         {
         super.viewDidLoad()
             
-        if let categories = CoreDataUtil.loadCategories()
+        if let categories = DataModelUtil.loadCategories()
             {
             categoryArray = categories
             }
@@ -44,7 +44,7 @@ class CategoryViewController: UITableViewController
                 newCategory.name = addCategoryTextField.text!
                 self.categoryArray.append(newCategory)
                     
-                CoreDataUtil.saveCategories(Categories: self.categoryArray)
+                DataModelUtil.saveCategories(Categories: self.categoryArray)
                 self.tableView.reloadData()
                 }
             }
@@ -67,6 +67,19 @@ class CategoryViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath)
         {
+        performSegue(withIdentifier: "goToItems",
+                     sender: self)
+        }
+    
+    override func prepare(for segue: UIStoryboardSegue,
+                          sender: Any?)
+        {
+        let destinationVC = segue.destination as! ToDoListViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow
+            {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+            }
         }
 
     //MARK - Tableview DataSource methods

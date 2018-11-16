@@ -11,21 +11,20 @@ import UIKit
 class ToDoListViewController: UITableViewController
     {
     var itemArray = [Item()]
+    
+    var selectedCategory : Category?
+        {
+        didSet
+            {
+            itemArray = DataModelUtil.loadItems(category : selectedCategory!)!
+            }
+        }
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad()
         {
         super.viewDidLoad()
-            
-        // Do any additional setup after loading the view, typically from a nib.
-        itemArray.removeAll()
-
-        if let items = CoreDataUtil.loadItems()
-            {
-            itemArray = items
-            }
- 
         }
     
     //MARK - Tableview DataSource methods
@@ -65,7 +64,7 @@ class ToDoListViewController: UITableViewController
         
         tableView.deselectRow(at: indexPath, animated: true)
             
-        CoreDataUtil.saveItems(Items: itemArray)
+        DataModelUtil.saveItems(Items: itemArray)
         }
     
 
@@ -89,9 +88,10 @@ class ToDoListViewController: UITableViewController
                     
                 newItem.title = addItemTextField.text!
                 newItem.done = false
+                newItem.parentCategory = self.selectedCategory
                 self.itemArray.append(newItem)
                     
-                CoreDataUtil.saveItems(Items: self.itemArray)
+                DataModelUtil.saveItems(Items: self.itemArray)
                 self.tableView.reloadData()
                 }
             }
