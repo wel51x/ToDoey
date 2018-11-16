@@ -12,8 +12,6 @@ class ToDoListViewController: UITableViewController
     {
     var itemArray = [Item()]
 
-    let defaults = UserDefaults.standard
-
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad()

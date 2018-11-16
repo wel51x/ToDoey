@@ -41,24 +41,32 @@ class CoreDataUtil
             }
         return(itemArray)
         }
-/*
-    static func loadItems() -> [Item]?
+ 
+    static func saveCategories(Categories : [Category]?)
         {
-        if let data = try? Data(contentsOf: CoreDataUtil.dataFilePath!)
+        do
             {
-            let decoder = PropertyListDecoder()
-            do
-                {
-                return(try decoder.decode([Item].self, from: data))
-                }
-            catch
-                {
-                print("Error decoding itemArray, \(error)")
-                }
+            try context.save()
             }
-        var itemArray = [Item()]
-        itemArray.removeAll()
-        return(itemArray)
+        catch
+            {
+            print("Error saving context, \(error)")
+            }
         }
- */
-    }
+    
+    static func loadCategories() -> [Category]?
+        {
+        var categoryArray  = [Category()]
+        categoryArray.removeAll()
+        let request : NSFetchRequest<Category> = Category.fetchRequest()
+        do
+            {
+            categoryArray = try context.fetch(request)
+            }
+        catch
+            {
+            print("Error loading itemArray, \(error)")
+            }
+        return(categoryArray)
+        }
+   }
