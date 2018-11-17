@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ToDoListViewController.swift
 //  ToDoey
 //
 //  Created by Winston Lee on 11/8/18.
@@ -7,20 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ToDoListViewController: UITableViewController
     {
-    var itemArray = [Item()]
+    var items : Results<Item>!
     
     var selectedCategory : Category?
         {
         didSet
             {
-            itemArray = DataModelUtil.loadItems(category : selectedCategory!)!
+            items = RealmModelUtil.loadItems(category : selectedCategory!)!
             }
         }
-
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad()
         {
@@ -32,7 +31,7 @@ class ToDoListViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int
         {
-        return itemArray.count
+        return items?.count ?? 1
         }
 
     override func tableView(_ tableView: UITableView,
@@ -40,11 +39,15 @@ class ToDoListViewController: UITableViewController
         {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell",
                                                  for: indexPath)
-        let item = itemArray[indexPath.row]
-            
-        cell.textLabel?.text = item.title
-            
-        cell.accessoryType = (item.done) ? .checkmark : .none
+        if let item = items?[indexPath.row]
+            {
+            cell.textLabel?.text = item.title
+            cell.accessoryType = (item.done) ? .checkmark : .none
+            }
+        else
+            {
+            cell.textLabel?.text = "No Items Added So Far"
+            }
 
         return cell
         }
@@ -58,13 +61,13 @@ class ToDoListViewController: UITableViewController
 //        context.delete(itemArray[indexPath.row])
 //        itemArray.remove(at: indexPath.row)
             
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done // flip checkmark
+//        items[indexPath.row].done = !items[indexPath.row].done // flip checkmark
         
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
             
-        DataModelUtil.saveItems(Items: itemArray)
+//        RealmModelUtil.saveItem(item: items[indexPath.row])
         }
     
 
@@ -84,14 +87,14 @@ class ToDoListViewController: UITableViewController
             // What happens when user clicks Add Item button on UIAlert
             if addItemTextField.text! != ""
                 {
-                let newItem = Item(context: self.context)
-                    
-                newItem.title = addItemTextField.text!
-                newItem.done = false
-                newItem.parentCategory = self.selectedCategory
-                self.itemArray.append(newItem)
-                    
-                DataModelUtil.saveItems(Items: self.itemArray)
+                if let currentCategory = self.selectedCategory
+                    {
+                    let newItem = Item()
+                    newItem.title = addItemTextField.text!
+//                    newItem.done = false  not needed - auto initialized
+                    RealmModelUtil.saveItem(item: newItem,
+                                            category: currentCategory)
+                    }
                 self.tableView.reloadData()
                 }
             }

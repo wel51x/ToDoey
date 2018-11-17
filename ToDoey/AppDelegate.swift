@@ -19,34 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                      didFinishLaunchingWithOptions
                             launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
         {
-
-        print(Realm.Configuration.defaultConfiguration.fileURL)
-        let data = Data()
-        data.name = "Winston"
-        data.age = 67
-        do
-            {
-            let realm = try Realm()
-            try realm.write
-                {
-                realm.add(data)
-                }
-            }
-        catch
-            {
-            print("Error creating Realm, \(error)")
-            }
+        RealmModelUtil.initRealm()
             
         return true
         }
 
     func applicationWillTerminate(_ application: UIApplication)
         {
-        self.saveContext()
+//        self.saveContext()
         }
     
     // MARK: - Core Data stack
-    
+/*
     lazy var persistentContainer: NSPersistentContainer =
         {
         let container = NSPersistentContainer(name: "DataModel")
@@ -78,4 +62,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 }
             }
         }
+ */
     }
