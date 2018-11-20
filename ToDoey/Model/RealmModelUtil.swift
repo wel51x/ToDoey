@@ -40,6 +40,22 @@ class RealmModelUtil
         }
     }
     
+    static func deleteCategory(category : Category?)
+        {
+        do
+            {
+            try realm!.write
+                {
+                // need to add functionality to delete category's items
+                realm?.delete(category!)
+                }
+            }
+        catch
+            {
+            print("Error deleting Category, \(error)")
+            }
+        }
+
     static func loadCategories() -> Results<Category>?
         {
         return(realm?.objects(Category.self))
