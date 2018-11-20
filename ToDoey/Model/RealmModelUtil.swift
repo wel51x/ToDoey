@@ -36,7 +36,7 @@ class RealmModelUtil
         }
         catch
         {
-        print("Error saving context, \(error)")
+        print("Error saving Category, \(error)")
         }
     }
     
@@ -58,10 +58,26 @@ class RealmModelUtil
             }
         catch
             {
-            print("Error saving context, \(error)")
+            print("Error saving Item, \(error)")
             }
         }
     
+    static func updateCheckBox(item : Item?)
+        {
+        do
+            {
+            try realm!.write
+                {
+                item!.done = !item!.done  // flip checkmark
+                realm!.add(item!)
+                }
+            }
+        catch
+            {
+            print("Error updating check box Item, \(error)")
+            }
+        }
+
     static func loadItems(category : Category) -> Results<Item>?
         {
         return(category.items.sorted(byKeyPath: "title",

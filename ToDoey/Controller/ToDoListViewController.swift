@@ -60,14 +60,13 @@ class ToDoListViewController: UITableViewController
 // if want to delete row rather than just set checkmark
 //        context.delete(itemArray[indexPath.row])
 //        itemArray.remove(at: indexPath.row)
-            
-//        items[indexPath.row].done = !items[indexPath.row].done // flip checkmark
+
+        let item = items[indexPath.row]
+        RealmModelUtil.updateCheckBox(item: item)
         
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
-            
-//        RealmModelUtil.saveItem(item: items[indexPath.row])
         }
     
 
