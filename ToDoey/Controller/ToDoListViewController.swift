@@ -57,10 +57,6 @@ class ToDoListViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
         {
-// if want to delete row rather than just set checkmark
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-
         let item = items[indexPath.row]
         RealmModelUtil.updateCheckBox(item: item)
         

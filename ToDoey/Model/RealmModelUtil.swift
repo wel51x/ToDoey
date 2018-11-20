@@ -68,6 +68,7 @@ class RealmModelUtil
             {
             try realm!.write
                 {
+//                realm?.delete(item)     // do this instaed of next statement if prefer to delete item
                 item!.done = !item!.done  // flip checkmark
                 realm!.add(item!)
                 }
