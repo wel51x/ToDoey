@@ -100,4 +100,20 @@ class RealmModelUtil
         return(category.items.sorted(byKeyPath: "title",
                                      ascending: true))
         }
+    
+    static func deleteItem(item : Item?)
+        {
+        do
+            {
+            try realm!.write
+                {
+                // need to add functionality to delete category's items
+                realm?.delete(item!)
+                }
+            }
+        catch
+            {
+            print("Error deleting Item, \(error)")
+            }
+        }
     }
