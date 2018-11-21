@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class ToDoListViewController: UITableViewController
+class ToDoListViewController: SwipeTableViewController
     {
     var items : Results<Item>!
     
@@ -25,6 +26,11 @@ class ToDoListViewController: UITableViewController
         {
         super.viewDidLoad()
         }
+
+    override func viewWillAppear(_ animated: Bool)
+        {
+        title = selectedCategory!.name
+        }
     
     //MARK - Tableview DataSource methods
     
@@ -37,8 +43,8 @@ class ToDoListViewController: UITableViewController
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell
         {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
-                                                 for: indexPath)
+        let cell = super.tableView(tableView,
+                                   cellForRowAt: indexPath)
         if let item = items?[indexPath.row]
             {
             cell.textLabel?.text = item.title
@@ -48,6 +54,10 @@ class ToDoListViewController: UITableViewController
             {
             cell.textLabel?.text = "No Items Added So Far"
             }
+//        cell.backgroundColor = UIColor(hexString: (items?[indexPath.row].color)!) ?? UIColor.randomFlat
+            cell.backgroundColor = UIColor(hexString: (selectedCategory?.color)!)!.darken(byPercentage: CGFloat(0.033 * Double(indexPath.row)))
+            cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!,
+                                                        returnFlat: true)
 
         return cell
         }
@@ -88,7 +98,8 @@ class ToDoListViewController: UITableViewController
                     {
                     let newItem = Item()
                     newItem.title = addItemTextField.text!
-//                    newItem.done = false  not needed - auto initialized
+                    newItem.color = UIColor.randomFlat.hexValue()
+
                     RealmModelUtil.saveItem(item: newItem,
                                             category: currentCategory)
                     }
@@ -107,5 +118,14 @@ class ToDoListViewController: UITableViewController
         present(alert,
                 animated: true,
                 completion: nil)
+        }
+    
+    override func deleteRowFromModel(at indexPath: IndexPath)
+        {
+        if let currentItem = self.items?[indexPath.row]
+            {
+            RealmModelUtil.deleteItem(item: currentItem)
+            }
+        tableView.reloadData()
         }
     }
