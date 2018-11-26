@@ -54,19 +54,19 @@ class RealmModelUtil
         }
     
     static func saveCategory(category : Category?)
-    {
-    do
         {
-        try realm!.write
+        do
             {
-            realm!.add(category!)
+            try realm!.write
+                {
+                realm!.add(category!)
+                }
+            }
+        catch
+            {
+            print("Error saving Category, \(error)")
             }
         }
-        catch
-        {
-        print("Error saving Category, \(error)")
-        }
-    }
     
     static func deleteCategory(category : Category?)
         {

@@ -14,6 +14,9 @@ class CategoryViewController: SwipeTableViewController
     {
     var categories : Results<Category>?
     
+    var catIndex : Int = 0
+    let color = ["F36027","26BA0A","DC51E9","40C3E9","84150A","E2F600","7E58F8","E7580F"]
+
     override func viewDidLoad()
         {
         super.viewDidLoad()
@@ -38,8 +41,17 @@ class CategoryViewController: SwipeTableViewController
                 let newCategory = Category()
                     
                 newCategory.name = addCategoryTextField.text!
-                newCategory.color = UIColor.randomFlat.hexValue()
                     
+                if (self.catIndex < 8)
+                    {
+                    newCategory.color = self.color[self.catIndex]
+                    }
+                else
+                    {
+                    newCategory.color = UIColor.randomFlat.hexValue()
+                    }
+                self.catIndex += 1
+
                 RealmModelUtil.saveCategory(category: newCategory)
                 self.tableView.reloadData()
                 }
@@ -104,6 +116,7 @@ class CategoryViewController: SwipeTableViewController
         if let currentCategory = self.categories?[indexPath.row]
             {
             RealmModelUtil.deleteCategory(category: currentCategory)
+            catIndex -= 1
             }
         tableView.reloadData()
         }
